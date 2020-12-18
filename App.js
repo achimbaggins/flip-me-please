@@ -5,6 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 Icon.loadFont()
 
+import {setTopLevelNavigator} from './src/helpers/navigasi'
 import configureStore from './src/redux/store'
 const { persistor, store } = configureStore()
 
@@ -12,7 +13,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <AppNavigator/>
+        <AppNavigator ref={navigatorRef => setTopLevelNavigator(navigatorRef)}/>
       </PersistGate>
     </Provider>
   )
