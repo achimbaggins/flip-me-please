@@ -16,6 +16,10 @@ export default function TransactionsPage(props){
     const [searchList, setSearchList] = useState([])
 
     useEffect(()=>{
+        getTransactions
+    },[])
+    
+    const getTransactions = useCallback(()=>{
         dispatch(get_data_transaksi())
         .then(res =>{
             let data = Object.values(res)
@@ -25,7 +29,7 @@ export default function TransactionsPage(props){
                 console.log(transactionsList,'======')
             }, 500);
         })
-    },[])
+    })
 
     const _onChangeText = v => {
         let normalize =  v.replace(/[^\w\s]/gi, '')
@@ -41,7 +45,7 @@ export default function TransactionsPage(props){
 
     return(
         <View style={{flex: 1,}}>
-            <Header title='Transaction List' back/>
+            <Header title='Transaction List'/>
             <View style={{backgroundColor: GREEN_LOW, flex: 1,}}>
                 <View style={{width: SCREEN_WIDTH-20, margin: 10, borderRadius: 6, height: 50, backgroundColor: WHITE, paddingHorizontal: 10, flexDirection: 'row'}}>
                     <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', }}>
