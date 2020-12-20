@@ -13,14 +13,14 @@ export default function TransactionsPage(props){
     const dispatch = useDispatch()
     const {transactionsList} = useSelector(state => state.transactionsReducer)
     const [keyword, setKeyword] = useState('')
+    const [searchList, setSearchList] = useState([])
 
     useEffect(()=>{
-        console.log(transactionsList,'======')
         dispatch(get_data_transaksi())
         .then(res =>{
             let data = Object.values(res)
             dispatch(set_transactions_list(data))
-            // console.log('res====', res, '=====', data)
+            console.log('res====', res, '=====', data)
             setTimeout(() => {
                 console.log(transactionsList,'======')
             }, 500);
@@ -28,7 +28,15 @@ export default function TransactionsPage(props){
     },[])
 
     const _onChangeText = v => {
-        setKeyword(v)
+        let normalize =  v.replace(/[^\w\s]/gi, '')
+        let source = [...transactionsList]
+        if(source.length > 0){
+            setKeyword(normalize)
+            let regex = new RegExp(normalize.toLowerCase(), 'g')
+            let findAll = source.filter(item => item.beneficiary_name && item.beneficiary_name.toLowerCase().match(regex) || item.beneficiary_bank && item.beneficiary_bank.toLowerCase().match(regex) || item.sender_bank && item.sender_bank.toLowerCase().match(regex) ||   item.amount && item.amount.toString().slice(0,normalize.length) == normalize )
+            console.log('hasil cari ===', findAll, regex)
+            setSearchList(findAll)
+        }
     }
 
     return(
@@ -48,7 +56,18 @@ export default function TransactionsPage(props){
                     </TouchableOpacity>
                 </View>
                 {
-                    transactionsList.length > 0 &&
+                    searchList.length > 0 ?
+                    <FlatList
+                        data={searchList}
+                        renderItem={({item, index})=>{
+                            return(
+                                <View style={{padding: 5}}>
+                                    <Text>{item.beneficiary_name}</Text>
+                                </View>
+                            )
+                        }}
+                    />
+                    : transactionsList.length > 0 ?
                     <FlatList
                         data={transactionsList}
                         renderItem={({item, index})=>{
@@ -58,7 +77,8 @@ export default function TransactionsPage(props){
                                 </View>
                             )
                         }}
-                    />
+                    /> 
+                    : null
                 }
                 <Text onPress={()=>navigate('TransactionDetail')}>Menuju Transaction Detail</Text>
             </View>
