@@ -1,3 +1,4 @@
 import Header from './Header'
+import TransactionCard from './TransactionCard'
 
-export {Header}
+export {Header, TransactionCard}

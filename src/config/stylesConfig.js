@@ -3,7 +3,7 @@ import {moderateScale} from '../helpers/scaling'
 
 export const WHITE = '#ffffff' 
 export const GREEN = '#53b785' 
-export const GREEN_LOW = '#def5ed' 
+export const GREEN_LOW = '#f5f9f8' 
 export const ORANGE = '#ef6c3d' 
 export const GREY = '#adadad' 
 export const BLACK = '#212121' 

@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import {navigate} from '../helpers/navigasi'
 import {clear_data, set_transactions_list, get_data_transaksi} from '../redux/actions/transactionsActions'
 
-import {Header} from '../components'
+import {Header, TransactionCard} from '../components'
 import { FontStyle, GREEN_LOW, GREY, ITEMS_CENTER, ORANGE, SCREEN_WIDTH, WHITE } from '../config/stylesConfig'
 
 export default function TransactionsPage(props){
@@ -61,26 +61,28 @@ export default function TransactionsPage(props){
                         data={searchList}
                         renderItem={({item, index})=>{
                             return(
-                                <View style={{padding: 5}}>
-                                    <Text>{item.beneficiary_name}</Text>
-                                </View>
+                                <TouchableOpacity onPress={()=>navigate('TransactionDetail', {item})}>
+                                    <TransactionCard {...item}/>
+                                </TouchableOpacity>
                             )
                         }}
-                    />
-                    : transactionsList.length > 0 ?
-                    <FlatList
+                        />
+                        : searchList.length == 0 && keyword.length ?
+                        <Text style={{textAlign:'center'}}>tidak dapat menemukan yang Anda cari.</Text>
+                        : transactionsList.length > 0 ?
+                        <FlatList
                         data={transactionsList}
                         renderItem={({item, index})=>{
                             return(
-                                <View style={{padding: 5}}>
-                                    <Text>{item.beneficiary_name}</Text>
-                                </View>
+                                <TouchableOpacity onPress={()=>navigate('TransactionDetail', {item})}>
+                                    <TransactionCard {...item}/>
+                                </TouchableOpacity>
                             )
                         }}
                     /> 
                     : null
                 }
-                <Text onPress={()=>navigate('TransactionDetail')}>Menuju Transaction Detail</Text>
+                <View style={{height: 30}}/>
             </View>
         </View>
     )
