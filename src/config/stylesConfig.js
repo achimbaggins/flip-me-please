@@ -29,7 +29,7 @@ export const ITEMS_END = {
 }
 
 export const FontStyle = (size, color, weight, family) => ({
-    fontSize: size ? size : 12,
+    fontSize: size ? moderateScale(size) : moderateScale(12),
     color: color ? color : BLACK,
     fontWeight: weight ? weight : 'normal',
 })
