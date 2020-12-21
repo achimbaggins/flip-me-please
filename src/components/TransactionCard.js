@@ -15,12 +15,14 @@ const styles = {
         marginVertical: 5,
         overflow: 'hidden',
         backgroundColor: WHITE,
-        height: 120,
+        height: 100,
         flexDirection: 'row',
     },
     contentContainer: {
-        padding: 20,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
         flex: 1,
+        justifyContent: 'space-between'
     },
 }
 
@@ -36,7 +38,7 @@ const TransactionCard = memo(({account_number, amount, beneficiary_bank, benefic
             label: 'Pengecekan',
             bg: ORANGE,
             text: FontStyle(12, BLACK, ''),
-            container: {backgroundColor: WHITE, borderWidth: 1, borderColor: ORANGE, borderRadius: 5, ...ITEMS_CENTER,  paddingHorizontal: 10}
+            container: {backgroundColor: WHITE, borderWidth: 1, borderColor: ORANGE, borderRadius: 5, ...ITEMS_CENTER,  paddingHorizontal: 10, paddingVertical: 5}
         },
     }
     return(

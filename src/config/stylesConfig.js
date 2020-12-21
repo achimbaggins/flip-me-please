@@ -8,6 +8,8 @@ export const ORANGE = '#ef6c3d'
 export const GREY = '#adadad' 
 export const BLACK = '#212121' 
 
+export const BLACK_OPACITY_20 = 'rgba(0,0,0,0.8)'
+
 export const SCREEN_WIDTH = Dimensions.get('window').width
 export const SCREEN_HEIGHT = Dimensions.get('window').height
 
